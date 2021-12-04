@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Астрономия</title>
+    </head>
+    <body id = "content">
+        <script>
+        let ws = new WebSocket("ws://localhost:10556/ws");
+        ws.onmessage = ({data}) => {
+        document.getElementById('content').innerHTML = ''
+        document.getElementById('content').innerHTML = data
+        }
+        </script>
+    </body>
+</html>

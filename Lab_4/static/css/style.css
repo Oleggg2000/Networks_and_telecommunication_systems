@@ -1,0 +1,22 @@
+.block {
+    border: 10px solid black;
+    width: 450px;
+    background-color: #ff8f20;
+    border-radius: 10px;
+    padding: 20px;
+}
+.text {
+    font-size: 20px;
+    font-family: Lucida Console, Courier, monospace;
+}
+#from {
+    width: 125px;
+}
+#cash {
+    width: 242px;
+}
+.button {
+    margin-left: 180px;
+    background-color: #ff4a46;
+}
+

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Конвертер валют</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+
+    <script type="text/javascript">
+    function GiveResults() {
+        var num = parseFloat(document.getElementById("cash").value);
+        var from = document.getElementById("from").value;
+        var to = document.getElementById("to").value;
+        var res;
+
+        if (((from=== "USD") && (to=== "USD")) || ((from=== "EUR") && (to=== "EUR")) || ((from=== "RUB") && (to=== "RUB"))) {
+            document.getElementById("answer").innerHTML="Результат "+num.toFixed(3)+to;
+        }
+        if ((from=== "USD") && (to=== "RUB")) {
+            document.getElementById("answer").innerHTML="Результат "+(num*{{ cur_value[0] }}).toFixed(3)+to;
+        }
+        if ((from=== "USD") && (to=== "JPY")) {
+            document.getElementById("answer").innerHTML="Результат "+((num*{{ cur_value[0] }})/{{ cur_value[2] }}).toFixed(3)+to;
+        }
+        if ((from=== "RUB") && (to=== "USD")) {
+            document.getElementById("answer").innerHTML="Результат "+(num/{{ cur_value[0] }}).toFixed(3)+to;
+        }
+        if ((from=== "EUR") && (to=== "RUB")) {
+            document.getElementById("answer").innerHTML="Результат "+(num*{{ cur_value[1] }}).toFixed(3)+to;
+        }
+        if ((from=== "EUR") && (to=== "JPY")) {
+            document.getElementById("answer").innerHTML="Результат "+((num*{{ cur_value[1] }})/{{ cur_value[2] }}).toFixed(3)+to;
+        }
+        if ((from=== "RUB") && (to=== "EUR")) {
+            document.getElementById("answer").innerHTML="Результат "+(num/{{ cur_value[1] }}).toFixed(3)+to;
+        }
+        if ((from=== "USD") && (to=== "EUR")) {
+            document.getElementById("answer").innerHTML="Результат "+((num*{{ cur_value[0] }})/{{ cur_value[1] }}).toFixed(3)+to;
+        }
+        if ((from=== "EUR") && (to=== "USD")) {
+            document.getElementById("answer").innerHTML="Результат "+((num*{{ cur_value[1] }})/{{ cur_value[0] }}).toFixed(3)+to;
+        }
+        if ((from=== "JPY") && (to=== "USD")) {
+            document.getElementById("answer").innerHTML="Результат "+((num*{{ cur_value[2] }})/{{ cur_value[0] }}).toFixed(3)+to;
+        }
+        if ((from=== "JPY") && (to=== "EUR")) {
+            document.getElementById("answer").innerHTML="Результат "+((num*{{ cur_value[2] }})/{{ cur_value[1] }}).toFixed(3)+to;
+        }
+        if ((from=== "RUB") && (to=== "JPY")) {
+            document.getElementById("answer").innerHTML="Результат "+(num/{{ cur_value[2] }}).toFixed(3)+to;
+        }
+        if ((from=== "JPY") && (to=== "RUB")) {
+            document.getElementById("answer").innerHTML="Результат "+(num*{{ cur_value[2] }}).toFixed(3)+to;
+        }
+    }
+    </script>
+</head>
+
+<body>
+<div class="block">
+<form action="/submit", method="POST">
+<label class="text">Выберите исходную валюту:</label>
+    <select id="from" name="from">
+        <option value="USD" selected="selected">Доллар США</option>
+        <option value="EUR">Евро</option>
+        <option value="JPY">Йена</option>
+        <option value="RUB">Рубль</option>
+    </select><br/>
+<label class="text">Введите сумму: </label>
+    <input id="cash" type="text" name="cash"/>
+      <br/>
+<label class="text">Выберите расчетную валюту: </label>
+     <select id="to" name="to">
+        <option value="USD">Доллар США</option>
+        <option value="EUR" selected="selected">Евро</option>
+        <option value="JPY">Йена</option>
+        <option value="RUB">Рубль</option>
+     </select>
+    <input type="submit" value="Вычислить" class="button" onclick="GiveResults()"/>
+    <br/>
+<h2 id="answer"></h2>
+</form>
+</div>
+
+</body>
+</html>
